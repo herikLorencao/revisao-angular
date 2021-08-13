@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransferenciaService } from '../services/transferencia.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class NovaTransferenciaComponent implements OnInit {
   valor = 0;
   destino = 0;
 
-  constructor(private service: TransferenciaService) {}
+  constructor(private service: TransferenciaService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -19,7 +20,7 @@ export class NovaTransferenciaComponent implements OnInit {
     this.service
       .adicionar({ valor: this.valor, destino: this.destino })
       .subscribe(
-        () => this.limparValores(),
+        () => this.router.navigateByUrl('extrato'),
         (error) => console.error(error)
       );
   }
